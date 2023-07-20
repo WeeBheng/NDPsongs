@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnAdd, btnEdit, btn5stars;
     ArrayList<NDPSongs> al = new ArrayList<NDPSongs>();
     ListView lv;
-
+//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

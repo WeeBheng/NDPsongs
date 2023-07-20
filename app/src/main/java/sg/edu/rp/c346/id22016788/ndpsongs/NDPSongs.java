@@ -10,7 +10,7 @@ public class NDPSongs implements Serializable {
     private String year;
     private String rating;
 
-    public NDPSongs( int id, String title, String singer, String year, String rating  ) {
+    public NDPSongs(int id, String title, String singer, String year, String rating  ) {
         this.id = id;
         this.title = title;
         this.singer = singer;
@@ -33,7 +33,8 @@ public class NDPSongs implements Serializable {
         return rating;
     }
 
-    public void setNDPSongsContent(String title, String singer, String year, String rating) {
+    public void setNDPSongsContent(int id, String title, String singer, String year, String rating) {
+        this.id = id;
         this.title = title;
         this.singer = singer;
         this.year = year;

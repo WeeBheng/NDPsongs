@@ -19,9 +19,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     Button btnAdd, btnEdit, btn5stars;
-    ArrayList<NDPSongs> al;
+    ArrayList<NDPSongs> al = new ArrayList<NDPSongs>();
     ListView lv;
-    ArrayAdapter<NDPSongs> aa;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +34,20 @@ public class MainActivity extends AppCompatActivity {
         lv = findViewById(R.id.lv);
 
         al = new ArrayList<NDPSongs>();
-        aa = new ArrayAdapter<NDPSongs>(this,
-                android.R.layout.simple_list_item_1, al);
-        lv.setAdapter(aa);
+
+        //aa = new ArrayAdapter<NDPSongs>(this,
+                //R.layout.row, al);
+
+        al.add(new NDPSongs(0, "Title1", "Singer1", "2022", "3"));
+        al.add(new NDPSongs(1, "Title2", "Singer2", "2022", "5"));
+
+        CustomAdapter adapter = new CustomAdapter(this, R.layout.row, al);
+        lv.setAdapter(adapter);
 
         DBHelper dbh = new DBHelper(MainActivity.this);
         al.clear();
         al.addAll(dbh.getAllNDPSongs());
-        aa.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
         Log.d("hope this works", al.toString());
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(MainActivity.this);
                 al.clear();
-                al.addAll(dbh.getAllNDPSongs("*****"));
-                aa.notifyDataSetChanged();
-                lv.setAdapter(aa);
+                al.addAll(dbh.getAllNDPSongs("5"));
+                adapter.notifyDataSetChanged();
+                lv.setAdapter(adapter);
             }
         }
         );

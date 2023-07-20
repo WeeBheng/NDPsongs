@@ -48,16 +48,26 @@ public class ModifyActivity extends AppCompatActivity {
 //        rating = (NDPSongs) i.getSerializableExtra("rating");
 
         tvContent1.setText("ID: " + song.getId());
-        etContent1.setText(song.getNDPSongsTitle());
-        etContent2.setText(song.getNDPSongsSinger());
-        etContent3.setText(song.getNDPSongsYear());
-        etContent4.setText(song.getNDPSongsRating());
+        etContent2.setText(song.getNDPSongsTitle());
+        etContent3.setText(song.getNDPSongsSinger());
+        etContent4.setText(song.getNDPSongsYear());
+
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(ModifyActivity.this);
-                song.setNDPSongsContent(etContent1.getText().toString(), etContent2.getText().toString(), etContent3.getText().toString(), etContent4.getText().toString());
+                if (radioButton1.isChecked()){
+                    song.setNDPSongsContent(Integer.parseInt(etContent1.getText().toString()), etContent2.getText().toString(), etContent3.getText().toString(), etContent4.getText().toString(), "1");
+                } else if (radioButton2.isChecked()){
+                    song.setNDPSongsContent(Integer.parseInt(etContent1.getText().toString()), etContent2.getText().toString(), etContent3.getText().toString(), etContent4.getText().toString(), "2");
+                } else if (radioButton3.isChecked()){
+                    song.setNDPSongsContent(Integer.parseInt(etContent1.getText().toString()), etContent2.getText().toString(), etContent3.getText().toString(), etContent4.getText().toString(), "3");
+                } else if (radioButton4.isChecked()){
+                    song.setNDPSongsContent(Integer.parseInt(etContent1.getText().toString()), etContent2.getText().toString(), etContent3.getText().toString(), etContent4.getText().toString(), "4");
+                } else {
+                    song.setNDPSongsContent(Integer.parseInt(etContent1.getText().toString()), etContent2.getText().toString(), etContent3.getText().toString(), etContent4.getText().toString(), "5");
+                }
                 dbh.updateNDPSongs(song);
                 dbh.close();
                 Intent intent = new Intent(ModifyActivity.this, MainActivity.class);
